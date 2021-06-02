@@ -1,0 +1,84 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.example.socketweatherdemo"
+        minSdkVersion 26
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile).all {
+    kotlinOptions.freeCompilerArgs += ['-Xopt-in=kotlin.Experimental',
+                                       '-Xopt-in=kotlinx.coroutines.FlowPreview',
+                                       '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                                       '-Xopt-in=kotlin.ExperimentalStdlibApi',
+                                       '-Xopt-in=kotlin.time.ExperimentalTime',
+                                       '-Xopt-in=androidx.compose.material.ExperimentalMaterialApi',
+                                       '-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi']
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    def conductor = '3.0.0'
+    implementation "com.bluelinelabs:conductor:$conductor"
+    implementation "com.bluelinelabs:conductor-androidx-transition:$conductor"
+
+    def coroutines = '1.4.3'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+    def threetenabp = '1.3.0'
+    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp"
+
+    def kotlin = '1.4.32'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin"
+
+    def retrofit = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+
+    def location = '18.0.0'
+    implementation "com.google.android.gms:play-services-location:$location"
+
+    def moshi = '1.11.0'
+    implementation "com.squareup.moshi:moshi:$moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi"
+
+    def leakcanary = '2.1'
+    implementation "com.squareup.leakcanary:leakcanary-object-watcher-android:$leakcanary"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary"
+
+    def viewmodel = '2.3.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel"
+}
